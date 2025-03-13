@@ -1,6 +1,5 @@
 import express from "express"
 import { loginToAvaility, closeBrowser } from "../services/bot"
-import { checkForNewReferrals } from "../services/referrals"
 import { BackupCode } from "../models/backup=code"
 
 export const availityRouter = express.Router()
@@ -21,16 +20,16 @@ availityRouter.post("/login", async (req, res) => {
   }
 })
 
-// Manually check for new referrals
-availityRouter.post("/check-referrals", async (req, res) => {
-  try {
-    await checkForNewReferrals()
-    res.status(200).json({ message: "Referral check completed" })
-  } catch (error) {
-    console.error("Error checking referrals:", error)
-    res.status(500).json({ message: "Internal server error", error: (error as Error).message })
-  }
-})
+// // Manually check for new referrals
+// availityRouter.post("/check-referrals", async (req, res) => {
+//   try {
+//     await checkForNewReferrals()
+//     res.status(200).json({ message: "Referral check completed" })
+//   } catch (error) {
+//     console.error("Error checking referrals:", error)
+//     res.status(500).json({ message: "Internal server error", error: (error as Error).message })
+//   }
+// })
 
 // Add backup codes
 availityRouter.post("/backup-codes", async (req, res):Promise<any> => {
